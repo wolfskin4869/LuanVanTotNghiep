@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itHome"
+        android:title="Trang chủ"
+        android:icon="@drawable/homes"
+        />
+    <item
+        android:id="@+id/iMobile"
+        android:title="Điện thoại di động"
+        android:icon="@drawable/phones"/>
+    <item
+        android:id="@+id/itTablet"
+        android:title="Máy tính bảng"
+        android:icon="@drawable/tablets"/>
+    <item
+        android:id="@+id/itLaptop"
+        android:title="Máy tính xách tay"
+        android:icon="@drawable/laptops"/>
+    <item
+        android:id="@+id/itTrademark"
+        android:title="Thương hiệu lớn"
+        android:icon="@drawable/trademakes"/>
+    <item
+        android:id="@+id/itTrending"
+        android:title="Xu hướng người dùng"
+        android:icon="@drawable/trends"/>
+    <item
+        android:id="@+id/itSale"
+        android:title="Khuyến mãi HOT"
+        android:icon="@drawable/sales"/>
+
+    <item
+        android:title="TIỆN ÍCH">
+        <menu>
+            <item
+                android:id="@+id/itQRCode"
+                android:title="Quét mã QR"
+                android:icon="@drawable/qrcodes"/>
+            <item
+                android:id="@+id/itProfile"
+                android:title="Trang cá nhân"
+                android:icon="@drawable/profiles"/>
+            <item
+                android:id="@+id/itInfo"
+                android:title="Thông tin ứng dụng"
+                android:icon="@drawable/iconapps"/>
+        </menu>
+    </item>
+</menu>
