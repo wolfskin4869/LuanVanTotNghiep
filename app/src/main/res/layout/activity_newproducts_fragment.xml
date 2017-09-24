@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp">
+    </ViewFlipper>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="SẢN PHẨM MỚI NHẤT"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/colorGoogle"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerNewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

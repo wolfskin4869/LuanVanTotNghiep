@@ -7,19 +7,17 @@
     android:layout_height="match_parent"
     android:paddingRight="20dp"
     android:paddingLeft="20dp"
-    android:background="@drawable/backdnhap"
     android:gravity="center">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
-        <com.example.lenovo.luanvantotnghiep.CustomView.ClearEditText
+        <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.ClearEditText
             android:id="@+id/txtTenDangNhap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tên đăng nhập hoặc Email"
-            android:textColor="@color/colorBlack"
             android:textSize="20sp"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -27,12 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
-        <com.example.lenovo.luanvantotnghiep.CustomView.PasswordEditText
-            android:id="@+id/txtMatKhau"
+        <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.PasswordEditText
+            android:id="@+id/txtMatKhauDN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
-            android:textColor="@color/colorBlack"
             android:textSize="20sp"
             app:useStrike="true"
             />
@@ -54,7 +51,7 @@
         android:text="Đăng nhập"
         android:layout_margin="10dp"
         android:textStyle="bold"
-        android:textColor="@color/colorToolbar"
+        android:textColor="@color/colorOrange"
         android:background="@drawable/border_dangnhap"/>
     <LinearLayout
         android:layout_width="match_parent"

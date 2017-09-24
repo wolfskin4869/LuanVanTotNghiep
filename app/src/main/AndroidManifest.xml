@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lenovo.luanvantotnghiep">
-    <uses-permission android:name="android.permission.INTERNET" />
+          package="com.example.lenovo.luanvantotnghiep">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
         <activity
-            android:name=".View.Home.MainActivity"
+            android:name=".View.Activities.MainActivity"
+            android:screenOrientation="portrait"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        <activity
+            android:name=".View.Activities.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".View.SpashScreen.SplashScreenActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:name=".View.Activities.DangNhapDangKyActivity"
+            android:label="Đăng nhập/Đăng ký"/>
         <activity
-            android:name=".View.DangNhap.DangNhapActivity"
-            android:label="Đăng nhập - Đăng ký">
-        </activity>
+            android:name=".View.Activities.SPTheoThuongHieuActivity"
+            android:parentActivityName=".View.Activities.MainActivity"/>
+        <activity
+            android:name=".View.Activities.DangNhapActivity"
+            android:parentActivityName=".View.Activities.MainActivity"/>
+        <activity
+            android:name=".View.Activities.DangKyActivity"
+            android:parentActivityName=".View.Activities.DangNhapActivity"/>
+        <activity
+            android:name=".View.Activities.ChiTietSanPhamActivity"
+            android:parentActivityName=".View.Activities.MainActivity"/>
+
     </application>
+
 </manifest>

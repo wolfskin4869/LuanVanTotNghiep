@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/CardView.Light"
+    app:cardCornerRadius="8dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progressBarTablet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:id="@+id/imgHinhTablet"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:src="@drawable/xperiaxz"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/txtTenTablet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="iPhone 7S Plus 125GB"
+                android:textStyle="bold"
+                android:gravity="center|bottom"
+                android:textColor="#F20"/>
+            <TextView
+                android:id="@+id/txtGiaTablet"
+                android:gravity="center|bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14,500,000 VNĐ"
+                android:textColor="@color/colorPrimary"/>
+        </LinearLayout>
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

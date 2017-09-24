@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bgdangnhap"
+    android:gravity="center">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Đăng nhập"
+        app:titleTextColor="#818181"/>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <ImageView
+            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/ecommerce_gray"/>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.ClearEditText
+                android:id="@+id/txtTenDangNhap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:textSize="18sp"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.PasswordEditText
+                android:id="@+id/txtMatKhauDN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mật khẩu"
+                android:textSize="18sp"
+                app:useStrike="true"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/btnDangNhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng nhập"
+            android:layout_margin="5dp"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlue"
+            android:background="@drawable/border_dangnhap"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:weightSum="2">
+            <Button
+                android:id="@+id/btnFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Facebook"
+                android:layout_margin="5dp"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textColor="@color/colorFacebook"
+                android:background="@drawable/border_dangnhap"/>
+            <Button
+                android:id="@+id/btnGoogle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Google"
+                android:layout_margin="5dp"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                android:textColor="@color/colorGoogle"
+                android:background="@drawable/border_dangnhap"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Chưa có tài khoản?"/>
+            <TextView
+                android:id="@+id/txtDangKy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng ký"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlue"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

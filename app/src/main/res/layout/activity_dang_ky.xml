@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgdangnhap"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Đăng ký"
+        app:titleTextColor="@color/colorGray"/>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <ImageView
+            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/ecommerce_gray"/>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_txtHoTen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+            <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.ClearEditText
+                android:id="@+id/txtHoTen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Họ tên"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+            <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.ClearEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_txtMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+            <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.PasswordEditText
+                android:id="@+id/txtMatKhau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mật khẩu"
+                app:useStrike="true"
+                app:useValidate="true"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mật khẩu phải bao gồm 8 ký tự và một chữ hoa"
+            android:paddingLeft="15dp"
+            android:textSize="13sp"
+            android:textStyle="italic"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_txtMatKhauAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+            <com.example.lenovo.luanvantotnghiep.MyPublic.CustomEditText.PasswordEditText
+                android:id="@+id/txtMatKhauAgain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Xác nhận lại mật khẩu"
+                app:useStrike="true"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/btnDangKy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng ký"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlue"
+            android:background="@drawable/border_dangnhap"/>
+    </LinearLayout>
+
+</LinearLayout>

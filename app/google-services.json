@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "686944743782",
+    "project_id": "project-2955543110053048117"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686944743782:android:adae6d82b4d6e7fd",
+        "android_client_info": {
+          "package_name": "com.example.lenovo.luanvantotnghiep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686944743782-r9mpbbc1r00jcpbtthl0cog4ffa9tpol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lenovo.luanvantotnghiep",
+            "certificate_hash": "81fc25251b0485c62577969b97a942e587127bfa"
+          }
+        },
+        {
+          "client_id": "686944743782-4cvbl4qavrehokssfi2cbte234uuj20f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzryxtehBm9A5A9EwkJwj_4GJUs8LugcQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
