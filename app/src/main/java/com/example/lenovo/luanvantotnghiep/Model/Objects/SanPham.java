@@ -14,6 +14,8 @@ public class SanPham {
     int soLuongTon, luotMuaSP;
     List<ThongSoKyThuat> thongSoKyThuatList;
 
+    byte[] hinhgiohang;
+
     public SanPham() {
     }
 
@@ -118,5 +120,13 @@ public class SanPham {
 
     public void setThongSoKyThuatList(List<ThongSoKyThuat> thongSoKyThuatList) {
         this.thongSoKyThuatList = thongSoKyThuatList;
+    }
+
+    public byte[] getHinhgiohang() {
+        return hinhgiohang;
+    }
+
+    public void setHinhgiohang(byte[] hinhgiohang) {
+        this.hinhgiohang = hinhgiohang;
     }
 }

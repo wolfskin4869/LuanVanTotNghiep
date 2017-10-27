@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ProgressBar
-            android:id="@+id/progressBarMobile"
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
@@ -24,12 +24,12 @@
             android:orientation="vertical"
             android:layout_gravity="center">
             <ImageView
-                android:id="@+id/imgHinhMobile"
+                android:id="@+id/imgHinhSanPham"
                 android:layout_width="120dp"
                 android:layout_height="130dp"
                 android:src="@drawable/xperiaxz"/>
             <TextView
-                android:id="@+id/txtTenMobile"
+                android:id="@+id/txtTenSanPham"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="iPhone 7S Plus 125GB"
@@ -37,7 +37,7 @@
                 android:textStyle="bold"
                 android:textColor="#F20"/>
             <TextView
-                android:id="@+id/txtGiaMobile"
+                android:id="@+id/txtGiaSanPham"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

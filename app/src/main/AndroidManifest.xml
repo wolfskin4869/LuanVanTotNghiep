@@ -3,6 +3,7 @@
           package="com.example.lenovo.luanvantotnghiep">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -16,15 +17,15 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
-
         <activity
             android:name=".View.Activities.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+        </activity>
         <activity
             android:name=".View.Activities.SplashScreenActivity"
             android:screenOrientation="portrait">
@@ -38,7 +39,7 @@
             android:name=".View.Activities.DangNhapDangKyActivity"
             android:label="Đăng nhập/Đăng ký"/>
         <activity
-            android:name=".View.Activities.SPTheoThuongHieuActivity"
+            android:name=".View.Activities.SPTheoTHActivity"
             android:parentActivityName=".View.Activities.MainActivity"/>
         <activity
             android:name=".View.Activities.DangNhapActivity"
@@ -49,7 +50,15 @@
         <activity
             android:name=".View.Activities.ChiTietSanPhamActivity"
             android:parentActivityName=".View.Activities.MainActivity"/>
-
+        <activity
+            android:name=".View.Activities.DanhGiaActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog"/>
+        <activity
+            android:name=".View.Activities.TatCaDanhGiaActivity"
+            android:parentActivityName=".View.Activities.ChiTietSanPhamActivity"/>
+        <activity
+            android:name=".View.Activities.GioHangActivity"
+            android:parentActivityName=".View.Activities.MainActivity"/>
     </application>
 
 </manifest>

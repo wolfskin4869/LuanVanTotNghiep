@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lenovo.luanvantotnghiep.Model.Models.ModelDangNhap;
 import com.example.lenovo.luanvantotnghiep.Presenter.Adapters.AdapterViewPagerDanhMucSP;
-import com.example.lenovo.luanvantotnghiep.Presenter.Logic_Presenters.PresenterDangNhap;
+import com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic.PresenterLogicChiTietSP;
+import com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic.PresenterLogicDangNhap;
 import com.example.lenovo.luanvantotnghiep.R;
-import com.example.lenovo.luanvantotnghiep.View.Interface_Views.IViewTrangChu;
+import com.example.lenovo.luanvantotnghiep.View.IViews.IViewTrangChu;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
     Toolbar toolBar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    PresenterDangNhap presenterTrangChu;
+    PresenterLogicDangNhap presenterTrangChu;
     String tenNguoiDung = "";
     String emailNguoiDung = "";
     AccessToken accessToken;
@@ -51,10 +54,11 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
     GoogleApiClient mGoogleApiClient;
     GoogleSignInResult googleSignInResult;
     ImageView imgUser;
-    TextView txtHoten, txtEmail;
+    TextView txtHoten, txtEmail, txtGioHang;
     View headerView;
     TabLayout tabDanhMuc;
     ViewPager viewPagerDanhMuc;
+    boolean onpause = false;
 
 
     @Override
@@ -86,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
         txtEmail = (TextView) headerView.findViewById(R.id.txtEmail);
         imgUser = (ImageView) headerView.findViewById(R.id.imgUser);
 
-        presenterTrangChu = new PresenterDangNhap(this);
+        presenterTrangChu = new PresenterLogicDangNhap(this);
         modelDangNhap = new ModelDangNhap();
         mGoogleApiClient = modelDangNhap.layGoogleApiClient(this,this);
 
@@ -111,9 +115,38 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(onpause){
+            PresenterLogicChiTietSP presenterLogicChiTietSP = new PresenterLogicChiTietSP();
+            txtGioHang.setText(String.valueOf(presenterLogicChiTietSP.demSPCoTrongGioHang(this)));
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onpause = true;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.option_menu_trangchu, menu);
         this.menu = menu;
+
+        MenuItem iGioHang = menu.findItem(R.id.itemGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(iGioHang);
+        txtGioHang = (TextView) giaoDienCustomGioHang.findViewById(R.id.txtSoLuongSPGioHang);
+        giaoDienCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iGioHang = new Intent(MainActivity.this,GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
+        PresenterLogicChiTietSP presenterLogicChiTietSP = new PresenterLogicChiTietSP();
+        txtGioHang.setText(String.valueOf(presenterLogicChiTietSP.demSPCoTrongGioHang(this)));
 
         itemDangNhap = menu.findItem(R.id.iteDangNhap);
         itemDangXuat = menu.findItem(R.id.iteDangXuat);
@@ -199,9 +232,13 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
 
                 if(!modelDangNhap.layCatchDangNhap(this).equals("")){
                     modelDangNhap.capNhatDuLieu(this,"");
+                    txtHoten.setText("Tên người dùng");
+                    txtEmail.setText("Emai / Facebook");
+                    imgUser.setImageResource(R.drawable.account);
                     this.menu.clear();
                     this.onCreateOptionsMenu(this.menu);
                 }
+                break;
         }
         return true;
     }

@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 
 import com.example.lenovo.luanvantotnghiep.Model.Objects.ThuongHieu;
 import com.example.lenovo.luanvantotnghiep.R;
-import com.example.lenovo.luanvantotnghiep.View.Activities.SPTheoThuongHieuActivity;
+import com.example.lenovo.luanvantotnghiep.View.Activities.SPTheoTHActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -59,9 +59,9 @@ public class AdapterTrademark extends RecyclerView.Adapter<AdapterTrademark.View
         holder.lnThuongHieu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iSanPhamTheoDanhMuc = new Intent(context, SPTheoThuongHieuActivity.class);
+                Intent iSanPhamTheoDanhMuc = new Intent(context, SPTheoTHActivity.class);
                 iSanPhamTheoDanhMuc.putExtra("MATHUONGHIEU", thuongHieu.getMaThuongHieu());
-                iSanPhamTheoDanhMuc.putExtra("TENTHUONGHIEU", thuongHieu.getTenThuongHieu());
+                iSanPhamTheoDanhMuc.putExtra("TENTHOUNGHIEU", thuongHieu.getTenThuongHieu());
                 context.startActivity(iSanPhamTheoDanhMuc);
             }
         });

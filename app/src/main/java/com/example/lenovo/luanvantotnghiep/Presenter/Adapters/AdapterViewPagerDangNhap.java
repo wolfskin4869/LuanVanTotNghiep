@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.lenovo.luanvantotnghiep.View.Fragments.DangKyFragment;
-import com.example.lenovo.luanvantotnghiep.View.Fragments.DangNhapFragment;
+import com.example.lenovo.luanvantotnghiep.View.Fragments.FragmentDangKy;
+import com.example.lenovo.luanvantotnghiep.View.Fragments.FragmentDangNhap;
 
 /**
  * Created by Lenovo on 6/10/2017.
@@ -21,11 +21,11 @@ public class AdapterViewPagerDangNhap extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0 :
-                DangNhapFragment dangNhapFragment = new DangNhapFragment();
-                return dangNhapFragment;
+                FragmentDangNhap fragmentDangNhap = new FragmentDangNhap();
+                return fragmentDangNhap;
             case 1 :
-                DangKyFragment dangKyFragment = new DangKyFragment();
-                return dangKyFragment;
+                FragmentDangKy fragmentDangKy = new FragmentDangKy();
+                return fragmentDangKy;
             default: return null;
         }
     }

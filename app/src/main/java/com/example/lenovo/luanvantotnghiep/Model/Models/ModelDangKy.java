@@ -29,16 +29,16 @@ public class ModelDangKy {
         hsmHam.put("ham","DangKyThanhVien");
 
         HashMap<String,String> hsmTenNSD = new HashMap<>();
-        hsmTenNSD.put("tennsd",nsd.getTenNSD());
+        hsmTenNSD.put("TENNSD",nsd.getTenNSD());
 
         HashMap<String,String> hsmTenDN = new HashMap<>();
-        hsmTenDN.put("tendangnhap",nsd.getTenDangNhap());
+        hsmTenDN.put("TENDANGNHAP",nsd.getTenDangNhap());
 
         HashMap<String,String> hsmMatKhau = new HashMap<>();
-        hsmMatKhau.put("matkhau",nsd.getMatKhau());
+        hsmMatKhau.put("MATKHAU",nsd.getMatKhau());
 
         HashMap<String,String> hsmMaLoaiNSD = new HashMap<>();
-        hsmMaLoaiNSD.put("maloainsd",nsd.getMaLoaiNSD());
+        hsmMaLoaiNSD.put("MALOAINSD",nsd.getMaLoaiNSD());
 
         atts.add(hsmHam);
         atts.add(hsmTenNSD);

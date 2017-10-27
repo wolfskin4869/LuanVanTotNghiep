@@ -11,13 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.lenovo.luanvantotnghiep.Model.Objects.NguoiSuDung;
-import com.example.lenovo.luanvantotnghiep.Presenter.Logic_Presenters.PresenterDangKy;
+import com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic.PresenterLogicDangKy;
 import com.example.lenovo.luanvantotnghiep.R;
-import com.example.lenovo.luanvantotnghiep.View.Interface_Views.IViewDangKy;
+import com.example.lenovo.luanvantotnghiep.View.IViews.IViewDangKy;
 
 public class DangKyActivity extends AppCompatActivity implements IViewDangKy, View.OnClickListener, View.OnFocusChangeListener{
 
-    PresenterDangKy presenterDangKy;
+    PresenterLogicDangKy presenterLogicDangKy;
     Button btnDangKy;
     EditText txtHoTen, txtEmail, txtMatKhau, txtMatKhauAgain;
     TextInputLayout input_HoTen, input_MatKhau, input_Email,input_MKhauAgain;
@@ -50,7 +50,7 @@ public class DangKyActivity extends AppCompatActivity implements IViewDangKy, Vi
 
     private void addEvents() {
         btnDangKy.setOnClickListener(this);
-        presenterDangKy = new PresenterDangKy(this);
+        presenterLogicDangKy = new PresenterLogicDangKy(this);
         txtHoTen.setOnFocusChangeListener(this);
         txtEmail.setOnFocusChangeListener(this);
         txtMatKhauAgain.setOnFocusChangeListener(this);
@@ -92,7 +92,7 @@ public class DangKyActivity extends AppCompatActivity implements IViewDangKy, Vi
             nsd.setTenDangNhap(email);
             nsd.setMatKhau(matkhau);
             nsd.setMaLoaiNSD("LNSD002");
-            presenterDangKy.thucHienDangKy(nsd);
+            presenterLogicDangKy.thucHienDangKy(nsd);
         }
     }
 

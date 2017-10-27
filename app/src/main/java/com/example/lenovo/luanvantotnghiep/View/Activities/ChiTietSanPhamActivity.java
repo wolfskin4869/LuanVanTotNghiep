@@ -1,49 +1,63 @@
 package com.example.lenovo.luanvantotnghiep.View.Activities;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.lenovo.luanvantotnghiep.Model.Objects.DanhGia;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.ThongSoKyThuat;
 import com.example.lenovo.luanvantotnghiep.MyPublic.Server;
+import com.example.lenovo.luanvantotnghiep.Presenter.Adapters.AdapterDanhGia;
 import com.example.lenovo.luanvantotnghiep.Presenter.Adapters.AdapterViewPagerSlider;
-import com.example.lenovo.luanvantotnghiep.Presenter.Logic_Presenters.PresenterChiTietSP;
+import com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic.PresenterLogicChiTietSP;
 import com.example.lenovo.luanvantotnghiep.R;
-import com.example.lenovo.luanvantotnghiep.View.Fragments.SliderCTSPFragment;
-import com.example.lenovo.luanvantotnghiep.View.Interface_Views.IViewChiTietSP;
+import com.example.lenovo.luanvantotnghiep.View.Fragments.FragmentCTSPSlider;
+import com.example.lenovo.luanvantotnghiep.View.IViews.IViewChiTietSP;
+import com.squareup.picasso.Picasso;
 
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewChiTietSP, ViewPager.OnPageChangeListener{
+public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewChiTietSP, ViewPager.OnPageChangeListener, View.OnClickListener{
 
     Toolbar toolBar;
     ViewPager viewPager;
-    PresenterChiTietSP presenterChiTietSP;
+    PresenterLogicChiTietSP presenterLogicChiTietSP;
     TextView[] txtDots;
     LinearLayout layoutDots;
+    RecyclerView recyclerDSDanhGia;
     String maSP;
     List<Fragment> fragmentList;
-    TextView txtTenSanPham, txtGiaSanPham, txtThongTinChiTiet;
-    ImageView imgXemThem;
+    TextView txtTenSanPham, txtGiaSanPham, txtThongTinChiTiet, txtVietDanhGia, txtTatCaDG, txtGioHang;
+    ImageView imgXemThem, imgHinhSanPham, imgThemVaoGioHang;
     LinearLayout lnThongSoKyThuat;
-    Boolean kiemtraExpandChiTiet = false;
+    Boolean kiemtraExpandChiTiet = false, onpause = false;
+    SanPham sanPhamGioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +68,48 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         layoutDots = (LinearLayout) findViewById(R.id.layoutDots);
         txtTenSanPham = (TextView) findViewById(R.id.txtTenSanPham);
         txtGiaSanPham = (TextView) findViewById(R.id.txtGiaSanPham);
+        txtVietDanhGia = (TextView) findViewById(R.id.txtVietDanhGia);
+        recyclerDSDanhGia = (RecyclerView) findViewById(R.id.recyclerDSDanhGia);
+        txtTatCaDG = (TextView) findViewById(R.id.txtTatCaDanhGia);
         txtThongTinChiTiet = (TextView) findViewById(R.id.txtThongTinChiTiet);
         imgXemThem = (ImageView) findViewById(R.id.imgXemThem);
+        imgHinhSanPham = (ImageView) findViewById(R.id.imgHinhSanPham);
         lnThongSoKyThuat = (LinearLayout) findViewById(R.id.lnThongSoKyThuat);
+        imgThemVaoGioHang = (ImageView) findViewById(R.id.imgThemVaoGioHang);
+
 
         maSP = getIntent().getStringExtra("MASANPHAM");
-        presenterChiTietSP = new PresenterChiTietSP(this);
-        presenterChiTietSP.layChiTietSanPham(maSP);
+        presenterLogicChiTietSP = new PresenterLogicChiTietSP(this);
+        presenterLogicChiTietSP.layChiTietSanPham(maSP);
+        presenterLogicChiTietSP.layDanhSachDanhGiaSanPham(maSP,0);
         actionBar();
+        txtVietDanhGia.setOnClickListener(this);
+        txtTatCaDG.setOnClickListener(this);
+        imgThemVaoGioHang.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(onpause){
+            PresenterLogicChiTietSP presenterLogicChiTietSP = new PresenterLogicChiTietSP();
+            txtGioHang.setText(String.valueOf(presenterLogicChiTietSP.demSPCoTrongGioHang(this)));
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onpause = true;
     }
 
     private void actionBar() {
         setSupportActionBar(toolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolBar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolBar.setTitle(" ");
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -85,58 +125,100 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option_menu_trangchu,menu);
+
+        MenuItem iGioHang = menu.findItem(R.id.itemGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(iGioHang);
+        giaoDienCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent iGioHang = new Intent(ChiTietSanPhamActivity.this,GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
+        txtGioHang = (TextView) giaoDienCustomGioHang.findViewById(R.id.txtSoLuongSPGioHang);
+        txtGioHang.setText(String.valueOf(presenterLogicChiTietSP.demSPCoTrongGioHang(this)));
+
         return true;
     }
 
-//    @Override
-//    public void hienThiChiTietSP(final SanPham sanPham) {
-//        txtTenSanPham.setText(sanPham.getTenSanPham());
-//        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        txtGiaSanPham.setText(decimalFormat.format(sanPham.getGiaSanPham())+ " VNĐ");
-//        txtThongTinChiTiet.setText(sanPham.getThongTinSP().substring(0,100));
-//
-//        if(sanPham.getThongTinSP().length() < 100){
-//            imgXemThem.setVisibility(View.GONE);
-//        }else{
-//            imgXemThem.setVisibility(View.VISIBLE);
-//            imgXemThem.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    kiemtraExpandChiTiet = !kiemtraExpandChiTiet;
-//                    if(kiemtraExpandChiTiet){
-//                        // mở chi tiết
-//                        txtThongTinChiTiet.setText(sanPham.getThongTinSP());
-//                        imgXemThem.setImageDrawable(getKeyboardUpDown(R.drawable.ic_keyboard_arrow_up_black_24dp));
-//                    }else{
-//                        // đóng chi tiết
-//                        txtThongTinChiTiet.setText(sanPham.getThongTinSP().substring(0,100));
-//                        imgXemThem.setImageDrawable(getKeyboardUpDown(R.drawable.ic_keyboard_arrow_down_black_24dp));
-//                    }
-//                }
-//            });
-//        }
-//
-//        List<ThongSoKyThuat> thongSoKyThuats = sanPham.getThongSoKyThuatList();
-//
-//        for(int i  = 0; i < thongSoKyThuats.size(); i++){
-//            LinearLayout lnTSKT = new LinearLayout(this);
-//            lnTSKT.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//            lnTSKT.setOrientation(LinearLayout.HORIZONTAL);
-//
-//            TextView txtTenThongSo = new TextView(this);
-//            txtTenThongSo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
-//            txtTenThongSo.setText(thongSoKyThuats.get(i).getTenThongSo());
-//
-//            TextView txtGiaTri = new TextView(this);
-//            txtGiaTri.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
-//            txtGiaTri.setText(thongSoKyThuats.get(i).getGiaTriThongSo());
-//
-//            lnTSKT.addView(txtTenThongSo);
-//            lnTSKT.addView(txtGiaTri);
-//
-//            lnThongSoKyThuat.addView(lnTSKT);
-//        }
-//    }
+    @Override
+    public void hienThiChiTietSP(final SanPham sanPham) {
+        sanPhamGioHang = sanPham;
+        String[] linkhinh = sanPham.getHinhNho().split(",");
+
+        maSP = sanPham.getMaSanPham();
+        txtTenSanPham.setText(sanPham.getTenSanPham());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        txtGiaSanPham.setText("Giá: "+decimalFormat.format(sanPham.getGiaSanPham())+ " VNĐ");
+        Picasso.with(this).load(Server.SERVER+sanPham.getHinhLon()).into(imgHinhSanPham);
+        txtThongTinChiTiet.setText(sanPham.getThongTinSP().substring(0,80)+ " ...");
+
+        if(sanPham.getThongTinSP().length() < 50){
+            imgXemThem.setVisibility(View.GONE);
+        }else{
+            imgXemThem.setVisibility(View.VISIBLE);
+            imgXemThem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    kiemtraExpandChiTiet = !kiemtraExpandChiTiet;
+                    if(kiemtraExpandChiTiet){
+                        // mở chi tiết
+                        txtThongTinChiTiet.setText(sanPham.getThongTinSP());
+                        imgXemThem.setImageDrawable(getKeyboardUpDown(R.drawable.ic_keyboard_arrow_up_black_24dp));
+                    }else{
+                        // đóng chi tiết
+                        txtThongTinChiTiet.setText(sanPham.getThongTinSP().substring(0,80) + "......");
+                        imgXemThem.setImageDrawable(getKeyboardUpDown(R.drawable.ic_keyboard_arrow_down_black_24dp));
+                    }
+                }
+            });
+        }
+
+        List<ThongSoKyThuat> thongSoKyThuats = sanPham.getThongSoKyThuatList();
+
+
+
+
+
+        if(thongSoKyThuats.size()!= 0){
+            for(int i  = 0; i < thongSoKyThuats.size(); i++){
+
+                LinearLayout lnTSKT1 = new LinearLayout(this);
+                lnTSKT1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                lnTSKT1.setOrientation(LinearLayout.HORIZONTAL);
+
+                TextView txtTenThongSo = new TextView(this);
+                txtTenThongSo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2.0f));
+                txtTenThongSo.setText(thongSoKyThuats.get(i).getTenThongSo());
+                txtTenThongSo.setPadding(10,0,0,0);
+
+                TextView txtGiaTri = new TextView(this);
+                txtGiaTri.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
+                txtGiaTri.setText(thongSoKyThuats.get(i).getGiaTriThongSo());
+                txtGiaTri.setPadding(0,0,5,0);
+
+                lnTSKT1.addView(txtTenThongSo);
+                lnTSKT1.addView(txtGiaTri);
+
+                lnThongSoKyThuat.addView(lnTSKT1);
+            }
+        }else{
+
+            LinearLayout lnTSKT2 = new LinearLayout(this);
+            lnTSKT2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            lnTSKT2.setPadding(5,5,5,5);
+            lnTSKT2.setOrientation(LinearLayout.HORIZONTAL);
+
+            TextView txtNoData = new TextView(this);
+            txtNoData.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            txtNoData.setText("Không có dữ  liệu");
+            txtNoData.setGravity(View.TEXT_ALIGNMENT_CENTER);
+            txtNoData.setPadding(5,5,5,5);
+            lnTSKT2.addView(txtNoData);
+            lnThongSoKyThuat.addView(lnTSKT2);
+        }
+
+    }
 
     private Drawable getKeyboardUpDown(int idDrawalble){
         Drawable drawable;
@@ -154,7 +236,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         fragmentList = new ArrayList<>();
 
         for(int i = 0; i < hinhAnhList.length ; i++){
-            SliderCTSPFragment ctspFragment = new SliderCTSPFragment();
+            FragmentCTSPSlider ctspFragment = new FragmentCTSPSlider();
             Bundle bundle = new Bundle();
             bundle.putString("LINKHINH", Server.SERVER + hinhAnhList[i]);
             ctspFragment.setArguments(bundle);
@@ -164,11 +246,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         AdapterViewPagerSlider adapterViewPagerSlider = new AdapterViewPagerSlider(getSupportFragmentManager(),fragmentList);
         viewPager.setAdapter(adapterViewPagerSlider);
         adapterViewPagerSlider.notifyDataSetChanged();
-        themDotSlider(0);
+        addDotSlider(0);
         viewPager.addOnPageChangeListener(this);
     }
 
-    private void themDotSlider(int vitrihientai){
+    private void addDotSlider(int currentPosition){
         txtDots = new TextView[fragmentList.size()];
 
         layoutDots.removeAllViews(); // làm sạch lại linear
@@ -181,7 +263,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
             layoutDots.addView(txtDots[i]);
         }
 
-        txtDots[vitrihientai].setTextColor(getIdColor(R.color.colorGray));
+        txtDots[currentPosition].setTextColor(getIdColor(R.color.colorGray));
     }
 
     private int getIdColor(int idcolor){
@@ -201,11 +283,60 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
 
     @Override
     public void onPageSelected(int position) {
-        themDotSlider(position);
+        addDotSlider(position);
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.txtVietDanhGia:
+                Intent iThemDanhGia = new Intent(this, DanhGiaActivity.class);
+                iThemDanhGia.putExtra("MASANPHAM", maSP);
+                startActivity(iThemDanhGia);
+                break;
+            case  R.id.txtTatCaDanhGia:
+                Intent iTatCaDanhGia = new Intent(ChiTietSanPhamActivity.this, TatCaDanhGiaActivity.class);
+                iTatCaDanhGia.putExtra("MASANPHAM",maSP);
+                startActivity(iTatCaDanhGia);
+                break;
+            case R.id.imgThemVaoGioHang:
+                ImageView imageView = (ImageView) findViewById(R.id.imgHinhSanPham);
+                Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+                byte[] hinhGioHang = byteArrayOutputStream.toByteArray();
+
+                sanPhamGioHang.setHinhgiohang(hinhGioHang);
+                presenterLogicChiTietSP.themGioHang(sanPhamGioHang, this);
+
+                break;
+        }
+    }
+
+    @Override
+    public void hienThiDsDanhGia(List<DanhGia> danhGiaList) {
+        AdapterDanhGia adapterDanhGia = new AdapterDanhGia(this,danhGiaList,3);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerDSDanhGia.setLayoutManager(layoutManager);
+        recyclerDSDanhGia.setAdapter(adapterDanhGia);
+        adapterDanhGia.notifyDataSetChanged();
+    }
+
+    @Override
+    public void themGioHangThanhCong() {
+        Toast.makeText(this, "Sản phảm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+        txtGioHang.setText(String.valueOf(presenterLogicChiTietSP.demSPCoTrongGioHang(this)));
+    }
+
+    @Override
+    public void themGioHangThatBai() {
+        Toast.makeText(this, "Sản phảm đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
     }
 }
