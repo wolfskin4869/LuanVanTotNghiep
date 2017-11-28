@@ -47,7 +47,7 @@ public class FragmentDangNhap extends Fragment implements View.OnClickListener, 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_fragment_dangnhap, container, false);
+        View view = inflater.inflate(R.layout.fragment_dangnhap, container, false);
 
         modelDangNhap = new ModelDangNhap();
         mGoogleApiClient = modelDangNhap.layGoogleApiClient(getContext(),this);

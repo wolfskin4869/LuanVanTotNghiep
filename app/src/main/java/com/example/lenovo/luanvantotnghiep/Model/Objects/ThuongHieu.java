@@ -5,24 +5,25 @@ package com.example.lenovo.luanvantotnghiep.Model.Objects;
  */
 
 public class ThuongHieu {
-    String maThuongHieu, tenThuongHieu, hinhThuongHieu;
+    int maThuongHieu;
+    String tenThuongHieu, hinhThuongHieu;
     int luotMua;
 
     public ThuongHieu() {
     }
 
-    public ThuongHieu(String maThuongHieu, String tenThuongHieu, String hinhThuongHieu, int luotMua) {
+    public ThuongHieu(int maThuongHieu, String tenThuongHieu, String hinhThuongHieu, int luotMua) {
         this.maThuongHieu = maThuongHieu;
         this.tenThuongHieu = tenThuongHieu;
         this.hinhThuongHieu = hinhThuongHieu;
         this.luotMua = luotMua;
     }
 
-    public String getMaThuongHieu() {
+    public int getMaThuongHieu() {
         return maThuongHieu;
     }
 
-    public void setMaThuongHieu(String maThuongHieu) {
+    public void setMaThuongHieu(int maThuongHieu) {
         this.maThuongHieu = maThuongHieu;
     }
 

@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/CardView.Light"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="5dp">
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -37,16 +37,25 @@
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
                         android:text="iPhone 7S Plus 125GB"
-                        android:textColor="#F20"/>
+                        android:textColor="@color/colorPrimary"
+                        />
                     <TextView
                         android:id="@+id/txtGiaSanPham"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:text="14,500,000 VNĐ"
-                        android:textColor="@color/colorPrimary"/>
+                        android:textColor="#F20"/>
+
+                    <TextView
+                        android:id="@+id/txtGiamGia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="14,500,000 VNĐ"
+                        android:visibility="gone"/>
+
                 </LinearLayout>
                 <ImageView
                     android:layout_width="60dp"

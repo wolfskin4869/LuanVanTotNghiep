@@ -1,41 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/itMobile"
-        android:title="Điện Thoại Di Động"
-        android:icon="@drawable/phones"/>
+        android:id="@+id/itHome"
+        android:title="Trang chủ"
+        android:icon="@drawable/home"/>
     <item
-        android:id="@+id/itTablet"
-        android:title="Máy Tính Bảng"
-        android:icon="@drawable/tablets"/>
+        android:id="@+id/itCart"
+        android:title="Giỏ hàng"
+        android:icon="@drawable/cart"/>
     <item
-        android:id="@+id/itLaptop"
-        android:title="Máy Tính Xách Tay"
-        android:icon="@drawable/laptops"/>
-    <item
-        android:id="@+id/itTrademark"
-        android:title="Thương Hiệu Nổi Bật"
-        android:icon="@drawable/trademakes"/>
-    <item
-        android:id="@+id/itSale"
-        android:title="Khuyến Mãi HOT"
-        android:icon="@drawable/sales"/>
-
+        android:id="@+id/itFavorite"
+        android:title="Yêu thích"
+        android:icon="@drawable/favoritw"/>
     <item
         android:title="QUẢN LÝ - HỖ TRỢ">
         <menu>
             <item
-                android:id="@+id/itProfile"
-                android:title="Trang Cá Nhân"
-                android:icon="@drawable/profiles"/>
-            <item
-                android:id="@+id/itContact"
-                android:title="Liên Hệ"
-                android:icon="@drawable/contact"/>
-            <item
                 android:id="@+id/itAboutUs"
                 android:title="Thông Tin Ứng Dụng"
-                android:icon="@drawable/app"/>
+                android:icon="@drawable/aboutus"/>
+            <item
+                android:id="@+id/itExit"
+                android:title="Thoát"
+                android:icon="@drawable/exit"/>
         </menu>
     </item>
 </menu>

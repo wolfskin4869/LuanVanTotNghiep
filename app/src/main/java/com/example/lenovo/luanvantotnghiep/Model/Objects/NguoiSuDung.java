@@ -5,13 +5,14 @@ package com.example.lenovo.luanvantotnghiep.Model.Objects;
  */
 
 public class NguoiSuDung {
-    String maNSD, tenNSD, tenDangNhap, matKhau, diaChi, ngaySinh, soDienThoai, eMail, maLoaiNSD;
+    int maNSD;
+    String tenNSD, tenDangNhap, matKhau, diaChi, ngaySinh, soDienThoai, eMail, maLoaiNSD;
     int gioiTinh;
 
     public NguoiSuDung() {
     }
 
-    public NguoiSuDung(String maNSD, String tenNSD, String tenDangNhap, String matKhau, String diaChi,
+    public NguoiSuDung(int maNSD, String tenNSD, String tenDangNhap, String matKhau, String diaChi,
                        String ngaySinh, String soDienThoai, String eMail, int gioiTinh, String maLoaiNSD) {
         this.maNSD = maNSD;
         this.tenNSD = tenNSD;
@@ -25,11 +26,11 @@ public class NguoiSuDung {
         this.maLoaiNSD = maLoaiNSD;
     }
 
-    public String getMaNSD() {
+    public int getMaNSD() {
         return maNSD;
     }
 
-    public void setMaNSD(String maNSD) {
+    public void setMaNSD(int maNSD) {
         this.maNSD = maNSD;
     }
 

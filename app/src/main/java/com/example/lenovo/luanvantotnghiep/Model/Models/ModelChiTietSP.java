@@ -2,6 +2,7 @@ package com.example.lenovo.luanvantotnghiep.Model.Models;
 
 import android.util.Log;
 
+import com.example.lenovo.luanvantotnghiep.Model.Objects.ChiTietKhuyenMai;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.DanhGia;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.ThongSoKyThuat;
@@ -23,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ModelChiTietSP {
 
-    public SanPham layChiTietSanPham(String maSP, String tenHam, String tenMang){
+    public SanPham layChiTietSanPham(int maSP, String tenHam, String tenMang){
 
         SanPham sanPham = new SanPham();
 
@@ -56,12 +57,16 @@ public class ModelChiTietSP {
 
                 JSONObject object = jsonChiTietSanPham.getJSONObject(i);
 
-                sanPham.setMaSanPham(object.getString("MASANPHAM"));
+                ChiTietKhuyenMai chiTietKhuyenMai = new ChiTietKhuyenMai();
+                chiTietKhuyenMai.setPhanTramKM(object.getInt("PHANTRAMKM"));
+                sanPham.setChiTietKhuyenMai(chiTietKhuyenMai);
+                sanPham.setMaSanPham(object.getInt("MASANPHAM"));
                 sanPham.setTenSanPham(object.getString("TENSANPHAM"));
                 sanPham.setGiaSanPham(object.getInt("GIASANPHAM"));
                 sanPham.setThongTinSP(object.getString("THONGTINSP"));
                 sanPham.setHinhNho(object.getString("HINHNHO"));
                 sanPham.setHinhLon(object.getString("HINHLON"));
+                sanPham.setSoLuongTon(object.getInt("SOLUONGTON"));
 
                 JSONArray jsonArrayTSKT = object.getJSONArray("THONGSOKYTHUAT");
                 for (int j = 0; j < jsonArrayTSKT.length(); j++){
@@ -90,7 +95,7 @@ public class ModelChiTietSP {
         return sanPham;
     }
 
-    public List<DanhGia> layDanhSachDanhGia(String maSP, int limit){
+    public List<DanhGia> layDanhSachDanhGia(int maSP, int limit){
         List<DanhGia> danhGiaList = new ArrayList<>();
         List<HashMap<String, String>> attrs = new ArrayList<>();
         String dataJSON = "";
@@ -101,7 +106,7 @@ public class ModelChiTietSP {
         hsHam.put("ham", "LayDanhSachDanhGiaTheoMaSP");            // hsHam.put("ham", "LayDanhSachSanPhamTheoThuongHieu");
 
         HashMap<String, String> hsmMaSP = new HashMap<>();
-        hsmMaSP.put("MASANPHAM", maSP);
+        hsmMaSP.put("MASANPHAM", String.valueOf(maSP));
 
         HashMap<String, String> hsmLimit = new HashMap<>();
         hsmLimit.put("LIMIT", String.valueOf(limit));

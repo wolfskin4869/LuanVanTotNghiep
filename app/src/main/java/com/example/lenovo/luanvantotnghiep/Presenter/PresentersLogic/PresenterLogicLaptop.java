@@ -2,6 +2,7 @@ package com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic;
 
 import com.example.lenovo.luanvantotnghiep.Model.Models.ModelLaptop;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
+import com.example.lenovo.luanvantotnghiep.Presenter.IPresenters.IPresenterLaptop;
 import com.example.lenovo.luanvantotnghiep.View.IViews.IViewLaptop;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by Lenovo on 6/23/2017.
  */
 
-public class PresenterLogicLaptop {
+public class PresenterLogicLaptop implements IPresenterLaptop {
 
     IViewLaptop iViewLaptop;
     ModelLaptop modelLaptop;

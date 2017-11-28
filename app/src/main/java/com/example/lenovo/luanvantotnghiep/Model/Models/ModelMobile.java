@@ -1,5 +1,8 @@
 package com.example.lenovo.luanvantotnghiep.Model.Models;
 
+import android.util.Log;
+
+import com.example.lenovo.luanvantotnghiep.Model.Objects.ChiTietKhuyenMai;
 import com.example.lenovo.luanvantotnghiep.MyPublic.DownloadJSON;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
 import com.example.lenovo.luanvantotnghiep.MyPublic.Server;
@@ -37,16 +40,21 @@ public class ModelMobile {
 
         try {
             dataJSON = downloadJSON.get();
+            Log.d("mobileJSON",dataJSON.toString());
             JSONObject jsonObject = new JSONObject(dataJSON);
-            JSONArray jsonDsSanPhamMoi = jsonObject.getJSONArray("MOBILE");
-            int count = jsonDsSanPhamMoi.length();
+            JSONArray jsonDanhSachMobile = jsonObject.getJSONArray("MOBILE");
+            int count = jsonDanhSachMobile.length();
             for (int i = 0; i < count; i++){
                 SanPham sanPham = new SanPham();
-                JSONObject object = jsonDsSanPhamMoi.getJSONObject(i);
-                sanPham.setMaSanPham(object.getString("MASANPHAM"));
+                JSONObject object = jsonDanhSachMobile.getJSONObject(i);
+                ChiTietKhuyenMai chiTietKhuyenMai = new ChiTietKhuyenMai();
+                chiTietKhuyenMai.setPhanTramKM(object.getInt("PHANTRAMKM"));
+
+                sanPham.setChiTietKhuyenMai(chiTietKhuyenMai);
+                sanPham.setMaSanPham(object.getInt("MASANPHAM"));
                 sanPham.setTenSanPham(object.getString("TENSANPHAM"));
                 sanPham.setGiaSanPham(object.getInt("GIASANPHAM"));
-                sanPham.setHinhLon(object.getString("HINHSANPHAM"));
+                sanPham.setHinhLon(Server.SERVER + object.getString("HINHSANPHAM"));
                 sanPhamList.add(sanPham);
             }
 

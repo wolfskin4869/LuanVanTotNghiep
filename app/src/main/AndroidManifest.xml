@@ -17,6 +17,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
+
         <activity
             android:name=".View.Activities.MainActivity"
             android:screenOrientation="portrait">
@@ -35,9 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".View.Activities.DangNhapDangKyActivity"
-            android:label="Đăng nhập/Đăng ký"/>
         <activity
             android:name=".View.Activities.SPTheoTHActivity"
             android:parentActivityName=".View.Activities.MainActivity"/>
@@ -59,6 +57,20 @@
         <activity
             android:name=".View.Activities.GioHangActivity"
             android:parentActivityName=".View.Activities.MainActivity"/>
+        <activity
+            android:name=".View.Activities.ThanhToanActivity"
+            android:parentActivityName=".View.Activities.MainActivity"/>
+        <activity
+            android:name=".View.Activities.TimKiemActivity"
+            android:parentActivityName=".View.Activities.MainActivity">
+        </activity>
+        <activity
+            android:name=".View.Activities.ThongTinUngDungActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog"/>
+        <activity
+            android:name=".View.Activities.YeuThichActivity"
+            android:parentActivityName=".View.Activities.MainActivity">
+        </activity>
     </application>
 
 </manifest>

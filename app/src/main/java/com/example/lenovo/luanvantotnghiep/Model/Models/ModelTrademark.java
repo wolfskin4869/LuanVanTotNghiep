@@ -43,9 +43,9 @@ public class ModelTrademark {
             for (int i = 0; i < count; i++){
                 ThuongHieu thuongHieu = new ThuongHieu();
                 JSONObject object = jsonDsThuongHieu.getJSONObject(i);
-                thuongHieu.setMaThuongHieu(object.getString("MATHUONGHIEU"));
+                thuongHieu.setMaThuongHieu(object.getInt("MATHUONGHIEU"));
                 thuongHieu.setTenThuongHieu(object.getString("TENTHUONGHIEU"));
-                thuongHieu.setHinhThuongHieu(object.getString("HINHTHUONGHIEU"));
+                thuongHieu.setHinhThuongHieu(Server.SERVER+object.getString("HINHTHUONGHIEU"));
                 thuongHieus.add(thuongHieu);
             }
 

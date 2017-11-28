@@ -34,7 +34,7 @@ public class FragmentTrademark extends Fragment implements IViewTrademark{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_trademark_fragment,container, false);
+        View view = inflater.inflate(R.layout.fragment_trademark,container, false);
         recyclerTrademark = (RecyclerView) view.findViewById(R.id.recyclerTrademark);
         presenterLogicTrademark = new PresenterLogicTrademark(this);
         presenterLogicTrademark.layDanhSachTrademark();

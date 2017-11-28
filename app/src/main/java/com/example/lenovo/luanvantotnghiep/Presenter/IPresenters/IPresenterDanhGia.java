@@ -10,5 +10,5 @@ import com.example.lenovo.luanvantotnghiep.Model.Objects.DanhGia;
 
 public interface IPresenterDanhGia {
     void themDanhGia(DanhGia danhGia);
-    void layDSDanhGiaTheoSP(String maSP, int limit, ProgressBar progressBar);
+    void layDSDanhGiaTheoSP(int maSP, int limit);
 }

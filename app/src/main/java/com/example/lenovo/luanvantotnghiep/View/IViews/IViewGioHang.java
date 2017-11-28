@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface IViewGioHang {
 
-    void hienThiDSSPTrongGioHang(List<SanPham> sanPhamList);
+    void hienThiDanhSachSanPhamTrongGioHang(List<SanPham> sanPhamList);
 }

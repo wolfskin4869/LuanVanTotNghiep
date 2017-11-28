@@ -10,7 +10,7 @@ import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
 
 public interface IPresenterChiTietSP {
 
-    void layChiTietSanPham(String maSP);
-    void layDanhSachDanhGiaSanPham(String maSP, int limit);
+    void layChiTietSanPham(int maSP);
+    void layDanhSachDanhGiaSanPham(int maSP, int limit);
     void themGioHang(SanPham sanPham, Context context);
 }

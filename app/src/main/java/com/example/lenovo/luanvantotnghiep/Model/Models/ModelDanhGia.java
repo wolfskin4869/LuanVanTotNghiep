@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ModelDanhGia {
 
-    public List<DanhGia> layDanhSachDanhGia(String maSP, int limit){
+    public List<DanhGia> layDanhSachDanhGia(int maSP, int limit){
         List<DanhGia> danhGiaList = new ArrayList<>();
         List<HashMap<String, String>> attrs = new ArrayList<>();
         String dataJSON = "";
@@ -32,7 +32,7 @@ public class ModelDanhGia {
         hsHam.put("ham", "LayDanhSachDanhGiaTheoMaSP");            // hsHam.put("ham", "LayDanhSachSanPhamTheoThuongHieu");
 
         HashMap<String, String> hsmMaSP = new HashMap<>();
-        hsmMaSP.put("MASANPHAM", maSP);
+        hsmMaSP.put("MASANPHAM", String.valueOf(maSP));
 
         HashMap<String, String> hsmLimit = new HashMap<>();
         hsmLimit.put("LIMIT", String.valueOf(limit));

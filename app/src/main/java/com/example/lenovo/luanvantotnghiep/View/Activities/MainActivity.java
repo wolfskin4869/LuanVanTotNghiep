@@ -1,11 +1,18 @@
 package com.example.lenovo.luanvantotnghiep.View.Activities;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -15,15 +22,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.lenovo.luanvantotnghiep.Model.Models.ModelDangNhap;
 import com.example.lenovo.luanvantotnghiep.Presenter.Adapters.AdapterViewPagerDanhMucSP;
 import com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic.PresenterLogicChiTietSP;
 import com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic.PresenterLogicDangNhap;
 import com.example.lenovo.luanvantotnghiep.R;
+import com.example.lenovo.luanvantotnghiep.View.Fragments.FragmentMobile;
+import com.example.lenovo.luanvantotnghiep.View.Fragments.FragmentTablet;
 import com.example.lenovo.luanvantotnghiep.View.IViews.IViewTrangChu;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
@@ -38,8 +47,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements IViewTrangChu,
-        GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class MainActivity extends AppCompatActivity implements IViewTrangChu,View.OnClickListener,
+        GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener{
 
     Toolbar toolBar;
     DrawerLayout drawerLayout;
@@ -53,11 +64,13 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
     MenuItem itemDangNhap, itemDangXuat;
     GoogleApiClient mGoogleApiClient;
     GoogleSignInResult googleSignInResult;
-    ImageView imgUser;
+    CircleImageView imgUser;
     TextView txtHoten, txtEmail, txtGioHang;
+    Button btnSearch;
     View headerView;
     TabLayout tabDanhMuc;
     ViewPager viewPagerDanhMuc;
+    AdapterViewPagerDanhMucSP adapter;
     boolean onpause = false;
 
 
@@ -80,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
     }
 
 
-
     private void addControls() {
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -88,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
         headerView = navigationView.getHeaderView(0);
         txtHoten = (TextView) headerView.findViewById(R.id.txtHoten);
         txtEmail = (TextView) headerView.findViewById(R.id.txtEmail);
-        imgUser = (ImageView) headerView.findViewById(R.id.imgUser);
+        imgUser = (CircleImageView) headerView.findViewById(R.id.imgUser);
+        btnSearch = (Button) findViewById(R.id.btnSearch);
 
         presenterTrangChu = new PresenterLogicDangNhap(this);
         modelDangNhap = new ModelDangNhap();
@@ -96,9 +109,11 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
 
         tabDanhMuc = (TabLayout) findViewById(R.id.tabDanhMuc);
         viewPagerDanhMuc = (ViewPager) findViewById(R.id.viewPagerDanhMuc);
-        AdapterViewPagerDanhMucSP adapter = new AdapterViewPagerDanhMucSP(getSupportFragmentManager());
+        adapter = new AdapterViewPagerDanhMucSP(getSupportFragmentManager());
         viewPagerDanhMuc.setAdapter(adapter);
         tabDanhMuc.setupWithViewPager(viewPagerDanhMuc);
+        btnSearch.setOnClickListener(this);
+
 
     }
 
@@ -251,24 +266,39 @@ public class MainActivity extends AppCompatActivity implements IViewTrangChu,
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-           // case R.id.itCategory:
-                /*Intent intentN = new Intent(this, DanhSachDanhMucActivity.class);
-                startActivity(intentN);
-                drawerLayout.closeDrawer(GravityCompat.START);*/
+            case R.id.itCart:
+                Intent iCart = new Intent(this,GioHangActivity.class);
+                startActivity(iCart);
+                break;
 
-               /* Fragment mFragment = null;
-                mFragment = new DanhSachDanhMucActivity();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.container, mFragment).commit();*/
-               // break;
-            case R.id.itMobile:
-                /*Intent intent = new Intent(this, DanhSachDanhMucActivity.class);
-                startActivity(intent);
-                drawerLayout.closeDrawer(GravityCompat.START);
-                break;*/
+            case R.id.itFavorite:
+                Intent iFavorite = new Intent(this,YeuThichActivity.class);
+                startActivity(iFavorite);
+                break;
+
+            case R.id.itAboutUs:
+                Intent iAboutUs = new Intent(this,ThongTinUngDungActivity.class);
+                startActivity(iAboutUs);
+                break;
+
+            case R.id.itExit:
+                System.exit(0);
+                break;
+
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.btnSearch:
+                Intent iSearch = new Intent(MainActivity.this, TimKiemActivity.class);
+                startActivity(iSearch);
+                break;
+        }
     }
 }
 

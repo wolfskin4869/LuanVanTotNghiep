@@ -2,6 +2,7 @@ package com.example.lenovo.luanvantotnghiep.View.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -15,16 +16,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lenovo.luanvantotnghiep.Model.Objects.ChiTietKhuyenMai;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.DanhGia;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.ThongSoKyThuat;
@@ -33,7 +36,7 @@ import com.example.lenovo.luanvantotnghiep.Presenter.Adapters.AdapterDanhGia;
 import com.example.lenovo.luanvantotnghiep.Presenter.Adapters.AdapterViewPagerSlider;
 import com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic.PresenterLogicChiTietSP;
 import com.example.lenovo.luanvantotnghiep.R;
-import com.example.lenovo.luanvantotnghiep.View.Fragments.FragmentCTSPSlider;
+import com.example.lenovo.luanvantotnghiep.View.Fragments.FragmentSliderChiTietSanPham;
 import com.example.lenovo.luanvantotnghiep.View.IViews.IViewChiTietSP;
 import com.squareup.picasso.Picasso;
 
@@ -51,13 +54,14 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     TextView[] txtDots;
     LinearLayout layoutDots;
     RecyclerView recyclerDSDanhGia;
-    String maSP;
+    Button btnMuaNgay;
+    int maSP;
     List<Fragment> fragmentList;
-    TextView txtTenSanPham, txtGiaSanPham, txtThongTinChiTiet, txtVietDanhGia, txtTatCaDG, txtGioHang;
+    TextView txtTenSanPham, txtGiaSanPham, txtThongTinChiTiet, txtVietDanhGia, txtTatCaDG, txtGioHang, txtGiamGia;
     ImageView imgXemThem, imgHinhSanPham, imgThemVaoGioHang;
     LinearLayout lnThongSoKyThuat;
     Boolean kiemtraExpandChiTiet = false, onpause = false;
-    SanPham sanPhamGioHang;
+    SanPham sanPhamSQLite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         layoutDots = (LinearLayout) findViewById(R.id.layoutDots);
         txtTenSanPham = (TextView) findViewById(R.id.txtTenSanPham);
         txtGiaSanPham = (TextView) findViewById(R.id.txtGiaSanPham);
+        txtGiamGia = (TextView) findViewById(R.id.txtGiamGia);
         txtVietDanhGia = (TextView) findViewById(R.id.txtVietDanhGia);
         recyclerDSDanhGia = (RecyclerView) findViewById(R.id.recyclerDSDanhGia);
         txtTatCaDG = (TextView) findViewById(R.id.txtTatCaDanhGia);
@@ -76,9 +81,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         imgHinhSanPham = (ImageView) findViewById(R.id.imgHinhSanPham);
         lnThongSoKyThuat = (LinearLayout) findViewById(R.id.lnThongSoKyThuat);
         imgThemVaoGioHang = (ImageView) findViewById(R.id.imgThemVaoGioHang);
+        btnMuaNgay = (Button) findViewById(R.id.btnMuaNgay);
 
 
-        maSP = getIntent().getStringExtra("MASANPHAM");
+        maSP = getIntent().getIntExtra("MASANPHAM",0);
         presenterLogicChiTietSP = new PresenterLogicChiTietSP(this);
         presenterLogicChiTietSP.layChiTietSanPham(maSP);
         presenterLogicChiTietSP.layDanhSachDanhGiaSanPham(maSP,0);
@@ -86,6 +92,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         txtVietDanhGia.setOnClickListener(this);
         txtTatCaDG.setOnClickListener(this);
         imgThemVaoGioHang.setOnClickListener(this);
+        btnMuaNgay.setOnClickListener(this);
     }
 
     @Override
@@ -95,7 +102,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
             PresenterLogicChiTietSP presenterLogicChiTietSP = new PresenterLogicChiTietSP();
             txtGioHang.setText(String.valueOf(presenterLogicChiTietSP.demSPCoTrongGioHang(this)));
         }
-
     }
 
     @Override
@@ -128,6 +134,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
 
         MenuItem iGioHang = menu.findItem(R.id.itemGioHang);
         View giaoDienCustomGioHang = MenuItemCompat.getActionView(iGioHang);
+
         giaoDienCustomGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,14 +150,37 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
 
     @Override
     public void hienThiChiTietSP(final SanPham sanPham) {
-        sanPhamGioHang = sanPham;
-        String[] linkhinh = sanPham.getHinhNho().split(",");
-
         maSP = sanPham.getMaSanPham();
+
+        sanPhamSQLite = sanPham;
+        sanPhamSQLite.setSoLuongTon(sanPham.getSoLuongTon());
+
         txtTenSanPham.setText(sanPham.getTenSanPham());
+
+        ChiTietKhuyenMai chiTietKhuyenMai = sanPham.getChiTietKhuyenMai();
+        int giaTien = sanPham.getGiaSanPham();
+
+        if(chiTietKhuyenMai != null){
+
+            int phanTramKM = chiTietKhuyenMai.getPhanTramKM();
+            if(phanTramKM != 0){
+
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                String giaCu = decimalFormat.format(giaTien);
+                txtGiamGia.setVisibility(View.VISIBLE);
+                txtGiamGia.setPaintFlags(txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                txtGiamGia.setText("Giá cũ: "+giaCu+ " VNĐ");
+
+                giaTien = giaTien - (giaTien*phanTramKM/100);
+            }
+        }
+
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        txtGiaSanPham.setText("Giá: "+decimalFormat.format(sanPham.getGiaSanPham())+ " VNĐ");
-        Picasso.with(this).load(Server.SERVER+sanPham.getHinhLon()).into(imgHinhSanPham);
+        txtGiaSanPham.setText("Giá: "+decimalFormat.format(giaTien)+ " VNĐ");
+
+//        Log.d("HinhHinh",sanPham.getHinhLon());
+        Picasso.with(this).load(Server.SERVER + sanPham.getHinhLon()).into(imgHinhSanPham);
+
         txtThongTinChiTiet.setText(sanPham.getThongTinSP().substring(0,80)+ " ...");
 
         if(sanPham.getThongTinSP().length() < 50){
@@ -236,9 +266,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
         fragmentList = new ArrayList<>();
 
         for(int i = 0; i < hinhAnhList.length ; i++){
-            FragmentCTSPSlider ctspFragment = new FragmentCTSPSlider();
+            FragmentSliderChiTietSanPham ctspFragment = new FragmentSliderChiTietSanPham();
             Bundle bundle = new Bundle();
             bundle.putString("LINKHINH", Server.SERVER + hinhAnhList[i]);
+            Log.d("Mến", Server.SERVER +  hinhAnhList[i]);
             ctspFragment.setArguments(bundle);
             fragmentList.add(ctspFragment);
         }
@@ -278,7 +309,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
@@ -295,16 +325,19 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
+
             case R.id.txtVietDanhGia:
                 Intent iThemDanhGia = new Intent(this, DanhGiaActivity.class);
                 iThemDanhGia.putExtra("MASANPHAM", maSP);
                 startActivity(iThemDanhGia);
                 break;
+
             case  R.id.txtTatCaDanhGia:
                 Intent iTatCaDanhGia = new Intent(ChiTietSanPhamActivity.this, TatCaDanhGiaActivity.class);
                 iTatCaDanhGia.putExtra("MASANPHAM",maSP);
                 startActivity(iTatCaDanhGia);
                 break;
+
             case R.id.imgThemVaoGioHang:
                 ImageView imageView = (ImageView) findViewById(R.id.imgHinhSanPham);
                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
@@ -313,10 +346,48 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
                 byte[] hinhGioHang = byteArrayOutputStream.toByteArray();
 
-                sanPhamGioHang.setHinhgiohang(hinhGioHang);
-                presenterLogicChiTietSP.themGioHang(sanPhamGioHang, this);
+                sanPhamSQLite.setHinhSQLite(hinhGioHang);
+                sanPhamSQLite.setSoLuongDat(1);
+                presenterLogicChiTietSP.themGioHang(sanPhamSQLite, this);
 
                 break;
+
+            case R.id.btnMuaNgay:
+
+                ImageView imageView1 = (ImageView) findViewById(R.id.imgHinhSanPham);
+                Bitmap bitmap1 = ((BitmapDrawable)imageView1.getDrawable()).getBitmap();
+
+                ByteArrayOutputStream byteArrayOutputStream1 = new ByteArrayOutputStream();
+                bitmap1.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream1);
+                byte[] hinhGioHang1 = byteArrayOutputStream1.toByteArray();
+
+                sanPhamSQLite.setHinhSQLite(hinhGioHang1);
+                sanPhamSQLite.setSoLuongDat(1);
+                presenterLogicChiTietSP.themGioHang(sanPhamSQLite,this);
+
+                Intent iMuaNgay = new Intent(ChiTietSanPhamActivity.this, ThanhToanActivity.class);
+                startActivity(iMuaNgay);
+                break;
+
+
+//            case R.id.imgThemYeuThich:
+                /*ImageView imgHinhSPYeuThich = (ImageView) findViewById(R.id.imgHinhSanPham);
+                Bitmap bitmapYeuThich = ((BitmapDrawable)imgHinhSPYeuThich.getDrawable()).getBitmap();
+
+                ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
+                bitmapYeuThich.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream2);
+                byte[] hinhSPYeuThich = byteArrayOutputStream2.toByteArray();
+                
+                sanPhamSQLite.setHinhSQLite(hinhSPYeuThich);
+                presenterLogicChiTietSP.themYeuThich(sanPhamSQLite);
+
+                kiemtraYeuThich = !kiemtraYeuThich;
+                if(kiemtraYeuThich){
+                    imgThemYeuThich.setImageDrawable(getKeyboardUpDown(R.drawable.favorite));
+                }else{
+                    imgThemYeuThich.setImageDrawable(getKeyboardUpDown(R.drawable.favorite_border));
+                }
+                break;*/
         }
     }
 
@@ -339,4 +410,14 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements IViewCh
     public void themGioHangThatBai() {
         Toast.makeText(this, "Sản phảm đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
     }
+/*
+    @Override
+    public void themYeuThichThanhCong() {
+        Toast.makeText(this, "Sản phảm đã được thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void themYeuThichThatBai() {
+        Toast.makeText(this, "Sản phảm đã có trong danh sách yêu thích", Toast.LENGTH_SHORT).show();
+    }*/
 }

@@ -3,11 +3,13 @@ package com.example.lenovo.luanvantotnghiep.Model.Objects;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
+import com.example.lenovo.luanvantotnghiep.Model.Objects.ILoadMore;
 
 /**
- * Created by Lenovo on 10/14/2017.
+ * Created by Lenovo S410p on 8/5/2016.
  */
-
 public class LoadMoreScroll extends RecyclerView.OnScrollListener {
     int itemandautien = 0;
     int tongitem = 0;

@@ -35,7 +35,7 @@ public class FragmentTablet extends Fragment implements IViewTablet {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_tablet_fragment,container, false);
+        View view = inflater.inflate(R.layout.fragment_tablet,container, false);
         recyclerTablet = (RecyclerView) view.findViewById(R.id.recyclerTablet);
         presenterLogicTablet = new PresenterLogicTablet(this);
         presenterLogicTablet.layDanhSachTablet();
@@ -46,7 +46,7 @@ public class FragmentTablet extends Fragment implements IViewTablet {
     @Override
     public void hienThiDanhSachTablet(List<SanPham> sanPhams) {
         sanPhamArray = sanPhams;
-        adapterTablet = new AdapterSanPham(getActivity(),sanPhamArray,R.layout.custom_recyclerview_tablet);
+        adapterTablet = new AdapterSanPham(getContext(),sanPhamArray,R.layout.custom_recyclerview_mobile);
         recyclerTablet.setHasFixedSize(true);
         recyclerTablet.setLayoutManager(new GridLayoutManager(getActivity(),2));
         recyclerTablet.setAdapter(adapterTablet);

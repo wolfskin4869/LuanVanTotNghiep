@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ModelSPTheoThuongHieu {
 
-    public List<SanPham> layDSSanPhamTheoThuongHieu(String maThuongHieu, String tenmang, String tenham, int limit){
+    public List<SanPham> layDSSanPhamTheoThuongHieu(int maThuongHieu, String tenmang, String tenham, int limit){
         List<SanPham> sanPhamList = new ArrayList<>();
         List<HashMap<String, String>> attrs = new ArrayList<>();
         String dataJSON = "";
@@ -54,10 +54,10 @@ public class ModelSPTheoThuongHieu {
                 SanPham sanPham = new SanPham();
                 JSONObject object = jsonArrayDSSanPham.getJSONObject(i);
 
-                sanPham.setMaSanPham(object.getString("MASANPHAM"));
+                sanPham.setMaSanPham(object.getInt("MASANPHAM"));
                 sanPham.setTenSanPham(object.getString("TENSANPHAM"));
                 sanPham.setGiaSanPham(object.getInt("GIASANPHAM"));
-                sanPham.setHinhLon(object.getString("HINHSANPHAM"));
+                sanPham.setHinhLon(Server.SERVER+object.getString("HINHSANPHAM"));
 
                 sanPhamList.add(sanPham);
             }

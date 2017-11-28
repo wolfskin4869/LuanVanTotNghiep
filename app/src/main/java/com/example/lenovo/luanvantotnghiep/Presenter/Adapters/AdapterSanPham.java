@@ -2,6 +2,7 @@ package com.example.lenovo.luanvantotnghiep.Presenter.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.lenovo.luanvantotnghiep.Model.Objects.ChiTietKhuyenMai;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
 import com.example.lenovo.luanvantotnghiep.R;
 import com.example.lenovo.luanvantotnghiep.View.Activities.ChiTietSanPhamActivity;
@@ -38,7 +40,7 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
     }
 
     public class ViewHolderSanPham extends RecyclerView.ViewHolder {
-        TextView txtTenSanPham, txtGiaSanPham;
+        TextView txtTenSanPham, txtGiaSanPham, txtGiamGia;
         ImageView imgHinhSanPham;
         ProgressBar progressBar;
         CardView cardView;
@@ -47,8 +49,10 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
             txtTenSanPham = (TextView) itemView.findViewById(R.id.txtTenSanPham);
             txtGiaSanPham = (TextView) itemView.findViewById(R.id.txtGiaSanPham);
             imgHinhSanPham = (ImageView) itemView.findViewById(R.id.imgHinhSanPham);
+            txtGiamGia = (TextView) itemView.findViewById(R.id.txtGiamGia);
             progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
+
         }
     }
 
@@ -66,8 +70,31 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
         holder.txtTenSanPham.setMaxLines(1);
         holder.txtTenSanPham.setEllipsize(TextUtils.TruncateAt.END);
         holder.txtTenSanPham.setText(sanPham.getTenSanPham());
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.txtGiaSanPham.setText("Giá: "+decimalFormat.format(sanPham.getGiaSanPham())+ " VNĐ");
+
+        ChiTietKhuyenMai chiTietKhuyenMai = sanPham.getChiTietKhuyenMai();
+        int giaTien = sanPham.getGiaSanPham();
+        if(chiTietKhuyenMai != null){
+            int phanTramKM = chiTietKhuyenMai.getPhanTramKM();
+
+            if(phanTramKM > 0){ // Nếu có phần trăm giảm giá
+
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                String giaSP = decimalFormat.format(giaTien);
+
+                holder.txtGiamGia.setVisibility(View.VISIBLE);
+                holder.txtGiamGia.setPaintFlags(holder.txtGiamGia.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.txtGiamGia.setText("Giá cũ: "+giaSP+ " VNĐ");
+
+                giaTien = giaTien - (giaTien*phanTramKM/100);
+
+            }else {
+                holder.txtGiamGia.setVisibility(View.GONE);
+            }
+        }
+        DecimalFormat format = new DecimalFormat("###,###,###");
+        holder.txtGiaSanPham.setText("Giá: "+format.format(giaTien)+ " VNĐ");
+
+
         Picasso.with(context).load(sanPham.getHinhLon()).into(holder.imgHinhSanPham, new Callback() {
             @Override
             public void onSuccess() {
@@ -80,12 +107,10 @@ public class AdapterSanPham extends RecyclerView.Adapter<AdapterSanPham.ViewHold
             }
         });
 
-      //  holder.cardView.setTag(sanPham.getMaSanPham());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent iChiTietSanPham = new Intent(context, ChiTietSanPhamActivity.class);
-//                iChiTietSanPham.putExtra("MASANPHAM", (String)v.getTag());
                 iChiTietSanPham.putExtra("MASANPHAM", sanPham.getMaSanPham());
                 context.startActivity(iChiTietSanPham);
             }

@@ -1,12 +1,13 @@
 package com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.example.lenovo.luanvantotnghiep.Model.GioHang.ModelGioHang;
+import com.example.lenovo.luanvantotnghiep.Model.SQLite.ModelGioHang;
 import com.example.lenovo.luanvantotnghiep.Model.Models.ModelChiTietSP;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.DanhGia;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
+import com.example.lenovo.luanvantotnghiep.Model.SQLite.ModelYeuThich;
+import com.example.lenovo.luanvantotnghiep.MyPublic.Server;
 import com.example.lenovo.luanvantotnghiep.Presenter.IPresenters.IPresenterChiTietSP;
 import com.example.lenovo.luanvantotnghiep.View.IViews.IViewChiTietSP;
 
@@ -22,6 +23,7 @@ public class PresenterLogicChiTietSP implements IPresenterChiTietSP{
     ModelChiTietSP modelChiTietSP;
     ModelGioHang modelGioHang;
 
+
     public PresenterLogicChiTietSP() {
         modelGioHang = new ModelGioHang();
     }
@@ -33,19 +35,17 @@ public class PresenterLogicChiTietSP implements IPresenterChiTietSP{
     }
 
     @Override
-    public void layChiTietSanPham(String maSP) {
-        SanPham sanPham = modelChiTietSP.layChiTietSanPham(maSP, "LaySPvaThongSoKyThuatTheoMaSP", "CHITIETSANPHAM");
-        Log.d("thongtin", sanPham.getThongTinSP().toString());
-        if (sanPham.getMaSanPham().length() > 0){
+    public void layChiTietSanPham(int maSP) {
+        SanPham sanPham = modelChiTietSP.layChiTietSanPham(maSP, "LayChiTietSPvaTSKTtheoMaSP", "CHITIETSANPHAM");
+        if (sanPham.getMaSanPham() > 0){
             String[] duongDanHSP = sanPham.getHinhNho().split(",");
-//            Log.d("duongDanHSP", sanPham.getHinhNho().split(",").toString());
             iViewChiTietSP.hienThiSlider(duongDanHSP);
             iViewChiTietSP.hienThiChiTietSP(sanPham);
         }
     }
 
     @Override
-    public void layDanhSachDanhGiaSanPham(String maSP, int limit) {
+    public void layDanhSachDanhGiaSanPham(int maSP, int limit) {
         List<DanhGia> danhGiaList = modelChiTietSP.layDanhSachDanhGia(maSP, limit);
         if(danhGiaList.size() > 0){
             iViewChiTietSP.hienThiDsDanhGia(danhGiaList);

@@ -31,7 +31,7 @@ public class FragmentLaptop extends Fragment implements IViewLaptop {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_laptop_fragment,container, false);
+        View view = inflater.inflate(R.layout.fragment_laptop,container, false);
         recyclerLaptop = (RecyclerView) view.findViewById(R.id.recyclerLaptop);
         presenterLogicLaptop = new PresenterLogicLaptop(this);
         presenterLogicLaptop.layDanhSachLaptop();
@@ -42,7 +42,7 @@ public class FragmentLaptop extends Fragment implements IViewLaptop {
     @Override
     public void hienThiDanhSachLaptop(List<SanPham> sanPhams) {
         sanPhamArray = sanPhams;
-        adapterLaptop = new AdapterSanPham(getActivity(),sanPhamArray,R.layout.custom_recyclerview_laptop);
+        adapterLaptop = new AdapterSanPham(getContext(),sanPhamArray,R.layout.custom_recyclerview_mobile);
         recyclerLaptop.setHasFixedSize(true);
         recyclerLaptop.setLayoutManager(new GridLayoutManager(getActivity(),2));
         recyclerLaptop.setAdapter(adapterLaptop);

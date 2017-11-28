@@ -29,19 +29,26 @@
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/txtTenSanPham"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="iPhone 7S Plus 125GB"
-                android:textStyle="bold"
-                android:gravity="center|bottom"
-                android:textColor="#F20"/>
+                android:textColor="@color/colorPrimary"
+                />
             <TextView
                 android:id="@+id/txtGiaSanPham"
-                android:gravity="center|bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="14,500,000 VNĐ"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="#F20"/>
+            <TextView
+                android:id="@+id/txtGiamGia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textStyle="italic"
+                android:text="14,500,000 VNĐ"/>
         </LinearLayout>
     </FrameLayout>
 

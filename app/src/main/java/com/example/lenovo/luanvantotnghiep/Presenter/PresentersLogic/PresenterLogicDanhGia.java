@@ -35,11 +35,9 @@ public class PresenterLogicDanhGia implements IPresenterDanhGia{
     }
 
     @Override
-    public void layDSDanhGiaTheoSP(String maSP, int limit, ProgressBar progressBar) {
-        progressBar.setVisibility(View.VISIBLE);
+    public void layDSDanhGiaTheoSP(int maSP, int limit) {
         List<DanhGia> danhGiaList = modelDanhGia.layDanhSachDanhGia(maSP,limit);
         if(danhGiaList.size() > 0){
-            progressBar.setVisibility(View.GONE);
             iViewDanhGia.hienThiDSDanhGiaTheoSP(danhGiaList);
         }
     }

@@ -1,29 +1,23 @@
 package com.example.lenovo.luanvantotnghiep.Model.Objects;
 
+import java.util.List;
+
 /**
  * Created by Lenovo on 6/22/2017.
  */
 
 public class KhuyenMai {
 
-    String maKhuyenMai, tenKhuyenMai, hinhKhuyenMai, ngayBatDauKM, ngayKetThucKM;
+    int maKhuyenMai;
+    int maLoaiSP;
+    String tenLoaiSP, tenKhuyenMai, hinhKhuyenMai, ngayBatDau, ngayKetThuc;
+    List<SanPham> dsSanPhamSale;
 
-    public KhuyenMai() {
-    }
-
-    public KhuyenMai(String maKhuyenMai, String tenKhuyenMai, String hinhKhuyenMai, String ngayBatDauKM, String ngayKetThucKM) {
-        this.maKhuyenMai = maKhuyenMai;
-        this.tenKhuyenMai = tenKhuyenMai;
-        this.hinhKhuyenMai = hinhKhuyenMai;
-        this.ngayBatDauKM = ngayBatDauKM;
-        this.ngayKetThucKM = ngayKetThucKM;
-    }
-
-    public String getMaKhuyenMai() {
+    public int getMaKhuyenMai() {
         return maKhuyenMai;
     }
 
-    public void setMaKhuyenMai(String maKhuyenMai) {
+    public void setMaKhuyenMai(int maKhuyenMai) {
         this.maKhuyenMai = maKhuyenMai;
     }
 
@@ -43,19 +37,43 @@ public class KhuyenMai {
         this.hinhKhuyenMai = hinhKhuyenMai;
     }
 
-    public String getNgayBatDauKM() {
-        return ngayBatDauKM;
+    public String getNgayBatDau() {
+        return ngayBatDau;
     }
 
-    public void setNgayBatDauKM(String ngayBatDauKM) {
-        this.ngayBatDauKM = ngayBatDauKM;
+    public void setNgayBatDau(String ngayBatDau) {
+        this.ngayBatDau = ngayBatDau;
     }
 
-    public String getNgayKetThucKM() {
-        return ngayKetThucKM;
+    public String getNgayKetThuc() {
+        return ngayKetThuc;
     }
 
-    public void setNgayKetThucKM(String ngayKetThucKM) {
-        this.ngayKetThucKM = ngayKetThucKM;
+    public void setNgayKetThuc(String ngayKetThuc) {
+        this.ngayKetThuc = ngayKetThuc;
+    }
+
+    public List<SanPham> getDsSanPhamSale() {
+        return dsSanPhamSale;
+    }
+
+    public void setDsSanPhamSale(List<SanPham> dsSanPhamSale) {
+        this.dsSanPhamSale = dsSanPhamSale;
+    }
+
+    public int getMaLoaiSP() {
+        return maLoaiSP;
+    }
+
+    public void setMaLoaiSP(int maLoaiSP) {
+        this.maLoaiSP = maLoaiSP;
+    }
+
+    public String getTenLoaiSP() {
+        return tenLoaiSP;
+    }
+
+    public void setTenLoaiSP(String tenLoaiSP) {
+        this.tenLoaiSP = tenLoaiSP;
     }
 }

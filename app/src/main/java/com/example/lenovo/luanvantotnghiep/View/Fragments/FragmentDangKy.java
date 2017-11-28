@@ -32,7 +32,7 @@ public class FragmentDangKy extends Fragment implements IViewDangKy, View.OnClic
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.layout_fragment_dangky, container, false);
+        View v = inflater.inflate(R.layout.fragment_dangky, container, false);
         btnDangKy = (Button) v.findViewById(R.id.btnDangKy);
 
         txtHoTen = (EditText) v.findViewById(R.id.txtHoTen);

@@ -48,7 +48,7 @@ public class AdapterDanhGia extends RecyclerView.Adapter<AdapterDanhGia.ViewHold
     public ViewHolderDanhGia onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.custom_layout_danhgiachitiet,parent,false);
+        View view = inflater.inflate(R.layout.custom_layout_danhgia_chitiet,parent,false);
         ViewHolderDanhGia viewHolderDanhGia = new ViewHolderDanhGia(view);
         return viewHolderDanhGia;
     }

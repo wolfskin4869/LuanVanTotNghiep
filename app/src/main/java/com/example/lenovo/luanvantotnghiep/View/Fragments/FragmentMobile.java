@@ -24,14 +24,10 @@ public class FragmentMobile extends Fragment implements IViewMobile{
     PresenterLogicMobile presenterLogicMobile;
     List<SanPham> sanPhamArray;
 
-    public FragmentMobile() {
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_mobile_fragment,container, false);
+        View view = inflater.inflate(R.layout.fragment_mobile,container, false);
         recyclerMobile = (RecyclerView) view.findViewById(R.id.recyclerMobile);
         presenterLogicMobile = new PresenterLogicMobile(this);
         presenterLogicMobile.layDanhSachMobile();
@@ -42,7 +38,7 @@ public class FragmentMobile extends Fragment implements IViewMobile{
     @Override
     public void hienThiDanhSachMobile(List<SanPham> sanPhams) {
         sanPhamArray = sanPhams;
-        mobileAdapter = new AdapterSanPham(getActivity(),sanPhamArray,R.layout.custom_recyclerview_mobile);
+        mobileAdapter = new AdapterSanPham(getContext(),sanPhamArray,R.layout.custom_recyclerview_mobile);
         recyclerMobile.setHasFixedSize(true);
         recyclerMobile.setLayoutManager(new GridLayoutManager(getActivity(),2));
         recyclerMobile.setAdapter(mobileAdapter);

@@ -1,6 +1,5 @@
 package com.example.lenovo.luanvantotnghiep.Model.Objects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,36 +8,18 @@ import java.util.List;
 
 public class SanPham {
 
-    String maSanPham, maLoaiSanPham, maThuongHieu, tenSanPham, thongTinSP, hinhLon, hinhNho;
+    String maLoaiSanPham, maThuongHieu, tenSanPham, thongTinSP, hinhLon, hinhNho;
     Integer giaSanPham;
-    int soLuongTon, luotMuaSP;
+    int maSanPham, soLuongDat, luotMuaSP, soLuongTon;
     List<ThongSoKyThuat> thongSoKyThuatList;
+    ChiTietKhuyenMai chiTietKhuyenMai;
+    byte[] hinhSQLite;
 
-    byte[] hinhgiohang;
-
-    public SanPham() {
-    }
-
-    public SanPham(String maSanPham, String maLoaiSanPham, String maThuongHieu, String tenSanPham, String thongTinSP, String hinhLon,
-                   Integer giaSanPham, int soLuongTon, int luotMuaSP, String hinhNho, List<ThongSoKyThuat> thongSoKyThuatList) {
-        this.maSanPham = maSanPham;
-        this.maLoaiSanPham = maLoaiSanPham;
-        this.maThuongHieu = maThuongHieu;
-        this.tenSanPham = tenSanPham;
-        this.thongTinSP = thongTinSP;
-        this.hinhLon = hinhLon;
-        this.giaSanPham = giaSanPham;
-        this.soLuongTon = soLuongTon;
-        this.luotMuaSP = luotMuaSP;
-        this.hinhNho = hinhNho;
-        this.thongSoKyThuatList = thongSoKyThuatList;
-    }
-
-    public String getMaSanPham() {
+    public int getMaSanPham() {
         return maSanPham;
     }
 
-    public void setMaSanPham(String maSanPham) {
+    public void setMaSanPham(int maSanPham) {
         this.maSanPham = maSanPham;
     }
 
@@ -90,12 +71,12 @@ public class SanPham {
         this.giaSanPham = giaSanPham;
     }
 
-    public int getSoLuongTon() {
-        return soLuongTon;
+    public int getSoLuongDat() {
+        return soLuongDat;
     }
 
-    public void setSoLuongTon(int soLuongTon) {
-        this.soLuongTon = soLuongTon;
+    public void setSoLuongDat(int soLuongDat) {
+        this.soLuongDat = soLuongDat;
     }
 
     public int getLuotMuaSP() {
@@ -122,11 +103,27 @@ public class SanPham {
         this.thongSoKyThuatList = thongSoKyThuatList;
     }
 
-    public byte[] getHinhgiohang() {
-        return hinhgiohang;
+    public int getSoLuongTon() {
+        return soLuongTon;
     }
 
-    public void setHinhgiohang(byte[] hinhgiohang) {
-        this.hinhgiohang = hinhgiohang;
+    public ChiTietKhuyenMai getChiTietKhuyenMai() {
+        return chiTietKhuyenMai;
+    }
+
+    public void setChiTietKhuyenMai(ChiTietKhuyenMai chiTietKhuyenMai) {
+        this.chiTietKhuyenMai = chiTietKhuyenMai;
+    }
+
+    public void setSoLuongTon(int soLuongTon) {
+        this.soLuongTon = soLuongTon;
+    }
+
+    public byte[] getHinhSQLite() {
+        return hinhSQLite;
+    }
+
+    public void setHinhSQLite(byte[] hinhSQLite) {
+        this.hinhSQLite = hinhSQLite;
     }
 }

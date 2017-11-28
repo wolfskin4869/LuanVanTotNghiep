@@ -2,7 +2,7 @@ package com.example.lenovo.luanvantotnghiep.Presenter.PresentersLogic;
 
 import android.content.Context;
 
-import com.example.lenovo.luanvantotnghiep.Model.GioHang.ModelGioHang;
+import com.example.lenovo.luanvantotnghiep.Model.SQLite.ModelGioHang;
 import com.example.lenovo.luanvantotnghiep.Model.Objects.SanPham;
 import com.example.lenovo.luanvantotnghiep.Presenter.IPresenters.IPresenterGioHang;
 import com.example.lenovo.luanvantotnghiep.View.IViews.IViewGioHang;
@@ -28,7 +28,7 @@ public class PresenterLogicGioHang implements IPresenterGioHang {
         modelGioHang.moKetNoi(context);
         List<SanPham> sanPhamList = modelGioHang.layDSSPTrongGioHang();
         if(sanPhamList.size() > 0){
-            iViewGioHang.hienThiDSSPTrongGioHang(sanPhamList);
+            iViewGioHang.hienThiDanhSachSanPhamTrongGioHang(sanPhamList);
         }
     }
 }

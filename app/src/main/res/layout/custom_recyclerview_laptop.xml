@@ -33,19 +33,26 @@
                         android:src="@drawable/xperiaxz"/>
                     <TextView
                         android:id="@+id/txtTenSanPham"
+                        android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textStyle="bold"
                         android:text="iPhone 7S Plus 125GB"
-                        android:textColor="#F20"/>
+                        android:textColor="@color/colorPrimary"
+                        />
                     <TextView
                         android:id="@+id/txtGiaSanPham"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="left"
                         android:text="14,500,000 VNĐ"
-                        android:gravity="center"
-                        android:textColor="@color/colorPrimary"/>
+                        android:textColor="#F20"/>
+                    <TextView
+                        android:id="@+id/txtGiamGia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textStyle="italic"
+                        android:text="14,500,000 VNĐ"/>
                 </LinearLayout>
             </FrameLayout>
     </android.support.v7.widget.CardView>

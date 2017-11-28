@@ -6,5 +6,5 @@ package com.example.lenovo.luanvantotnghiep.Presenter.IPresenters;
 
 public interface IPresenterSPTheoThuongHieu {
 
-    void layDanhSachTheoMaThuongHieu(String maThuongHieu);
+    void layDanhSachTheoMaThuongHieu(int maThuongHieu);
 }

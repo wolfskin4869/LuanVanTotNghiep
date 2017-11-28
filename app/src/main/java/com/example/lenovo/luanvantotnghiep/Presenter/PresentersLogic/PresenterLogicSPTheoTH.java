@@ -23,7 +23,7 @@ public class PresenterLogicSPTheoTH implements IPresenterSPTheoThuongHieu {
     }
 
     @Override
-    public void layDanhSachTheoMaThuongHieu(String maThuongHieu) {
+    public void layDanhSachTheoMaThuongHieu(int maThuongHieu) {
         List<SanPham> sanPhamList = modelSPTheoThuongHieu.layDSSanPhamTheoThuongHieu(maThuongHieu, "SANPHAMTHEOTHUONGHIEU", "LayDanhSachSanPhamTheoMaThuongHieu",20);
         if(sanPhamList.size() > 0){
             iViewSPTheoThuongHieu.hienThiDSSanPham(sanPhamList);

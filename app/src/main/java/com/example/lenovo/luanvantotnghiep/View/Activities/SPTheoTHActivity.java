@@ -33,7 +33,7 @@ public class SPTheoTHActivity extends AppCompatActivity implements IViewSPTheoTh
     boolean dangGrid = true;
     RecyclerView.LayoutManager layoutManager;
     PresenterLogicSPTheoTH sanPhamTheoThuongHieu;
-    String mathuonghieu;
+    int mathuonghieu;
     AdapterSanPham adapter;
 
     @Override
@@ -45,7 +45,7 @@ public class SPTheoTHActivity extends AppCompatActivity implements IViewSPTheoTh
         toolBar = (Toolbar) findViewById(R.id.toolBar);
 
         Intent intent = getIntent();
-        mathuonghieu = intent.getStringExtra("MATHUONGHIEU");
+        mathuonghieu = intent.getIntExtra("MATHUONGHIEU",0);
         String tenthuonghieu = intent.getStringExtra("TENSANPHAM");
         toolBar.setTitle(tenthuonghieu);
         setSupportActionBar(toolBar);
@@ -73,7 +73,7 @@ public class SPTheoTHActivity extends AppCompatActivity implements IViewSPTheoTh
             adapter = new AdapterSanPham(SPTheoTHActivity.this,sanPhams,R.layout.custom_recyclerview_mobile);
         }else{
             layoutManager = new LinearLayoutManager(SPTheoTHActivity.this);
-            adapter = new AdapterSanPham(SPTheoTHActivity.this,sanPhams,R.layout.custom_listview_sptheothuonghieu);
+            adapter = new AdapterSanPham(SPTheoTHActivity.this,sanPhams,R.layout.custom_listview_sanpham_theothuonghieu);
         }
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
